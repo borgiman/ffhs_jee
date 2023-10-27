@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="de"
       xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jstl/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 <h:head>
@@ -24,15 +25,18 @@
                     <div class="row">
                         <div class="col-2 ms-5">
                             <ul class="list-unstyled">
-                                <li class="pt-2 pb-2">
-                                    <a href="#">Audio</a>
-                                </li>
-                                <li class="pt-2 pb-2 border-top">
-                                    <a href="#">Büro + Papeterie</a>
-                                </li>
-                                <li class="pt-2 pb-2 border-top">
-                                    <a href="#">Drohnen + Elektronik</a>
-                                </li>
+                                <ui:repeat value="#{productCategoriesController.productCategories}" var="productCategory" varStatus="status">
+                                    <ui:fragment rendered="#{status.first}">
+                                        <li class="pt-2 pb-2">
+                                            <a href="#">#{productCategory.name}</a>
+                                        </li>
+                                    </ui:fragment>
+                                    <ui:fragment rendered="#{not status.first}">
+                                        <li class="pt-2 me-5 pb-2 border-top">
+                                            <a href="#">#{productCategory.name}</a>
+                                        </li>
+                                    </ui:fragment>
+                                </ui:repeat>
                             </ul>
                         </div>
                         <div class="col">

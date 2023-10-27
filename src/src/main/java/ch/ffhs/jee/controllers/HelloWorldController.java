@@ -1,4 +1,4 @@
-package ch.ffhs.jee;
+package ch.ffhs.jee.controllers;
 
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
