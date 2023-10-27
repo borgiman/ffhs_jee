@@ -7,7 +7,7 @@ To-Do:
 - ✅ use reusable template
 - ✅ include tabler.io
 - ✅ create basic layout
-- ❌ display fixed product categories on the left
+- ✅ display fixed product categories on the left
 - ❌ install database and create a script that idempotently creates schema and product categories
 - ❌ load and display product categories from database
 - ❌ when user clicks on product category, display a fixed text in the content view depending on the chosen product category
