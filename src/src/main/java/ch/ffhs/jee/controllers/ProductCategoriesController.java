@@ -5,7 +5,6 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.util.ArrayList;
 
