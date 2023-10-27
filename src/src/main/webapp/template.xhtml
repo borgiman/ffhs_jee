@@ -4,14 +4,32 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 <h:head>
-    <title>FFHSTec</title>
+    <title>FFHStec</title>
     <h:outputStylesheet name="css/tabler.min.css" />
     <h:outputStylesheet name="css/style.css" />
     <h:outputScript name="js/tabler.min.js" />
 </h:head>
 <h:body>
-    <p>default before layout</p>
-    <ui:insert name="content">Content</ui:insert>
-    <p>default before layout</p>
+    <div class="page">
+        <header class="navbar navbar-light">
+            <div class="container-fluid ms-5">
+                <h1 class="navbar-brand">FFHS tec</h1>
+            </div>
+        </header>
+        <div class="page-wrapper bg-light">
+            <div class="page-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-2 ms-5">
+                            <span>product categories here</span>
+                        </div>
+                        <div class="col">
+                            <ui:insert name="content" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </h:body>
 </html>
