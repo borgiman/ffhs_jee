@@ -6,11 +6,46 @@
         <ui:define name="metadata">
             <f:metadata>
                 <f:viewParam name="productCategoryId" value="#{productsController.productCategoryId}" />
-                <f:event type="preRenderView" listener="#{productsController.init}" />
+                <f:viewAction action="#{productsController.init}" />
             </f:metadata>
         </ui:define>
         <ui:define name="content">
-            <span>here are products for productCategoryId #{productsController.productCategoryId}</span>
+            <div class="container-fluid row">
+                <ui:repeat value="#{productsController.products}" var="product" varStatus="status">
+                    <div class="#{status.first || status.index % 3 == 0
+                    ? 'products-product-div col-4 mt-4 mb-4 pt-2 pb-2 ps-4 pe-4'
+                    : 'products-product-div col-4 mt-4 mb-4 pt-2 pb-2 ps-4 pe-4 border-start'}">
+                        <h:link class="products-product-link" outcome="product">
+                            <div class="products-product-link-hover-shadow"></div>
+                            <f:param name="productId" value="#{product.id}" />
+                            <h:graphicImage name="img/#{product.id}.png" />
+                            <div class="products-product-price-instock-div mt-4">
+                                <span class="products-product-price">#{product.price}.-</span>
+                                <span class="products-product-instock">
+                                    <svg fill="none" viewBox="0 0 16 16" width="16" height="16" class="sc-jdlgv0-0 frmseU"><path fill="#73C44D" fill-rule="evenodd" d="M6.893 11.139 3.847 8.092l1.108-1.015 1.938 1.939 4.153-4.154 1.108 1.107-5.261 5.17ZM8 1.999A6 6 0 1 0 8 14.003 6 6 0 0 0 8 2Z" clip-rule="evenodd"></path></svg>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="products-product-vendorName">#{product.vendorName}</span>
+                                <span class="products-product-productName">#{product.productName}</span>
+                            </div>
+                            <div>
+                                <span class="products-product-shortDetail">#{product.shortDetail}</span>
+                            </div>
+                            <div>
+                                <span class="products-product-rating">
+                                    <ui:repeat begin="1" end="5" var="i">
+                                        #{product.rating >= i
+                                                ? '★'
+                                                : '☆'}
+                                    </ui:repeat>
+                                </span>
+                                <span class="products-product-numberOfRatings">#{product.numberOfRatings}</span>
+                            </div>
+                        </h:link>
+                    </div>
+                </ui:repeat>
+            </div>
         </ui:define>
     </ui:composition>
 </div>

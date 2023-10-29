@@ -1,23 +1,30 @@
 package ch.ffhs.jee.controllers;
 
+import ch.ffhs.jee.data.DatabaseConnection;
 import ch.ffhs.jee.models.ProductCategory;
+import jakarta.annotation.PostConstruct;
+import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
-
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
 import java.util.ArrayList;
 
 @Named
 @RequestScoped
 public class ProductCategoriesController {
-    public Iterable<ProductCategory> getProductCategories() {
-        var productCategories = new ArrayList<ProductCategory>();
+    @EJB
+    private DatabaseConnection databaseConnection;
+    private ArrayList<ProductCategory> productCategories;
+
+    public ArrayList<ProductCategory> getProductCategories() {
+        return this.productCategories;
+    }
+
+    @PostConstruct
+    public void init() {
+        this.productCategories = new ArrayList<>();
 
         try {
-            var context = new InitialContext();
-            var dataSource = (DataSource)context.lookup("jdbc/jee");
-            var connection = dataSource.getConnection();
+            var connection = databaseConnection.getConnection();
             var statement = connection.createStatement();
             var resultSet = statement.executeQuery("select id, name from categories");
 
@@ -25,12 +32,10 @@ public class ProductCategoriesController {
                 var id = resultSet.getInt("id");
                 var name = resultSet.getString("name");
                 var productCategory = new ProductCategory(id, name);
-                productCategories.add(productCategory);
+                this.productCategories.add(productCategory);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return productCategories;
     }
 }
