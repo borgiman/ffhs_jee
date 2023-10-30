@@ -6,10 +6,10 @@ public class Product {
     private final String vendorName;
     private final String productName;
     private final String shortDetail;
-    private final double rating;
+    private final int rating;
     private final int numberOfRatings;
 
-    public Product(int id, int price, String vendorName, String productName, String shortDetail, double rating, int numberOfRatings) {
+    public Product(int id, int price, String vendorName, String productName, String shortDetail, int rating, int numberOfRatings) {
         this.id = id;
         this.price = price;
         this.vendorName = vendorName;
@@ -39,7 +39,7 @@ public class Product {
         return this.shortDetail;
     }
 
-    public double getRating() {
+    public int getRating() {
         return this.rating;
     }
 

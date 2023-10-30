@@ -12,8 +12,8 @@ To-Do:
 - ✅ load and display product categories from database
 - ✅ when user clicks on product category, display a fixed text in the content view depending on the chosen product category
 - ✅ create layout for products display with fixed products
-- ❌ extend db script to create products
-- ❌ load and display products from database
+- ✅ extend db script to create products
+- ✅ load and display products from database
 - ❌ when user clicks on product, display a fixed text in the content view depending on the chosen product
 - ❌ create layout for product display with fixed information
 - ❌ load product information from database
