@@ -14,7 +14,7 @@ To-Do:
 - ✅ create layout for products display with fixed products
 - ✅ extend db script to create products
 - ✅ load and display products from database
-- ❌ when user clicks on product, display a fixed text in the content view depending on the chosen product
+- ✅ when user clicks on product, display a fixed text in the content view depending on the chosen product
 - ❌ create layout for product display with fixed information
 - ❌ load product information from database
 - ❌ when user clicks on order, add product to cart, switch to cart view and display something simple for every product in the cart

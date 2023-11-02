@@ -6,35 +6,31 @@ import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 
-import java.util.ArrayList;
-
 @Named
 @RequestScoped
-public class ProductsController {
+public class ProductController {
     @EJB
     private DatabaseConnection databaseConnection;
-    private int productCategoryId;
-    private ArrayList<Product> products;
+    private int productId;
+    private Product product;
 
-    public int getProductCategoryId() {
-        return this.productCategoryId;
+    public int getProductId() {
+        return this.productId;
     }
 
-    public void setProductCategoryId(int productCategoryId) {
-        this.productCategoryId = productCategoryId;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
-    public ArrayList<Product> getProducts() {
-        return this.products;
+    public Product getProduct() {
+        return this.product;
     }
 
     public void init() {
-        this.products = new ArrayList<>();
-
         try {
             var connection = databaseConnection.getConnection();
-            var statement = connection.prepareStatement("select id, price, vendorName, productName, shortDetail, rating, numberOfRatings from products WHERE categoryId = ?");
-            statement.setInt(1, this.getProductCategoryId());
+            var statement = connection.prepareStatement("select id, price, vendorName, productName, shortDetail, rating, numberOfRatings from products WHERE id = ?");
+            statement.setInt(1, this.getProductId());
             var resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
@@ -45,8 +41,7 @@ public class ProductsController {
                 var shortDetail = resultSet.getString("shortDetail");
                 var rating = resultSet.getInt("rating");
                 var numberOfRatings = resultSet.getInt("numberOfRatings");
-                var product = new Product(id, price, vendorName, productName, shortDetail, rating, numberOfRatings);
-                this.products.add(product);
+                this.product = new Product(id, price, vendorName, productName, shortDetail, rating, numberOfRatings);
             }
         } catch (Exception e) {
             e.printStackTrace();
