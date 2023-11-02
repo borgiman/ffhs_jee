@@ -2,6 +2,7 @@ package ch.ffhs.jee.controllers;
 
 import ch.ffhs.jee.data.DatabaseConnection;
 import ch.ffhs.jee.models.Product;
+import ch.ffhs.jee.models.ProductCategory;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
@@ -13,6 +14,7 @@ public class ProductController {
     private DatabaseConnection databaseConnection;
     private int productId;
     private Product product;
+    private ProductCategory productCategory;
 
     public int getProductId() {
         return this.productId;
@@ -26,22 +28,37 @@ public class ProductController {
         return this.product;
     }
 
+    public ProductCategory getProductCategory() {
+        return this.productCategory;
+    }
+
     public void init() {
         try {
             var connection = databaseConnection.getConnection();
-            var statement = connection.prepareStatement("select id, price, vendorName, productName, shortDetail, rating, numberOfRatings from products WHERE id = ?");
+            var statement = connection.prepareStatement("select id, categoryId, price, vendorName, productName, shortDetail, rating, numberOfRatings from products WHERE id = ?");
             statement.setInt(1, this.getProductId());
             var resultSet = statement.executeQuery();
 
-            while (resultSet.next()) {
+            if (resultSet.next()) {
                 var id = resultSet.getInt("id");
+                var categoryId = resultSet.getInt("categoryId");
                 var price = resultSet.getInt("price");
                 var vendorName = resultSet.getString("vendorName");
                 var productName = resultSet.getString("productName");
                 var shortDetail = resultSet.getString("shortDetail");
                 var rating = resultSet.getInt("rating");
                 var numberOfRatings = resultSet.getInt("numberOfRatings");
-                this.product = new Product(id, price, vendorName, productName, shortDetail, rating, numberOfRatings);
+                this.product = new Product(id, categoryId, price, vendorName, productName, shortDetail, rating, numberOfRatings);
+
+                statement = connection.prepareStatement("select id, name from categories where id = ?");
+                statement.setInt(1, categoryId);
+                resultSet = statement.executeQuery();
+
+                if (resultSet.next()) {
+                    id = resultSet.getInt("id");
+                    var name = resultSet.getString("name");
+                    this.productCategory = new ProductCategory(id, name);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -67,3 +67,93 @@
     font-size: 13px;
     line-height: 1;
 }
+
+.product-breadcrumb {
+    list-style: none;
+}
+
+.product-breadcrumb-list-entry {
+    display: inline-block;
+}
+
+.product-breadcrumb-list-entry:last-of-type span {
+    color: #0009;
+}
+
+.product-detail {
+    min-height: 520px;
+    display: flex;
+}
+
+.product-image-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-div-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-price {
+    color: #e60021;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 32px;
+}
+
+.product-vendorName {
+    color: black;
+    font-weight: 600;
+    font-size: 32px;
+    margin-right: 0.5rem;
+}
+
+.product-productName {
+    color: black;
+    font-size: 32px;
+    font-weight: 200;
+}
+
+.product-rating-statictext {
+    color: #0009;
+    display: block;
+    font-size: 12px;
+}
+
+.product-rating {
+    color: black;
+    font-size: 13px;
+    line-height: 1;
+}
+
+.product-numberOfRatings {
+    margin-left: 8px;
+    color: #009;
+    font-size: 13px;
+    line-height: 1;
+}
+
+.product-shipping {
+    display: flex;
+    color: rgb(43, 136, 0);
+}
+
+.product-order-button {
+    padding: 9px 15px;
+    background-color: #00559d;
+    color: white;
+    width: 100%;
+    border-radius: 3px;
+    border-color: transparent;
+}
+
+.product-order-button:hover {
+    background-color: #e60021
+}
+
+.product-order-button:active {
+    background-color: #00559d;
+}

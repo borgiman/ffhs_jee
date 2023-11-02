@@ -2,6 +2,7 @@ package ch.ffhs.jee.models;
 
 public class Product {
     private final int id;
+    private final int categoryId;
     private final int price;
     private final String vendorName;
     private final String productName;
@@ -9,8 +10,9 @@ public class Product {
     private final int rating;
     private final int numberOfRatings;
 
-    public Product(int id, int price, String vendorName, String productName, String shortDetail, int rating, int numberOfRatings) {
+    public Product(int id, int categoryId, int price, String vendorName, String productName, String shortDetail, int rating, int numberOfRatings) {
         this.id = id;
+        this.categoryId = categoryId;
         this.price = price;
         this.vendorName = vendorName;
         this.productName = productName;
@@ -21,6 +23,10 @@ public class Product {
 
     public int getId() {
         return this.id;
+    }
+
+    public int getCategoryId() {
+        return this.categoryId;
     }
 
     public int getPrice() {
