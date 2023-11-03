@@ -1,0 +1,14 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+     xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:composition template="template.xhtml">
+        <ui:define name="content">
+            <div class="container-fluid row">
+                <ui:repeat value="#{cartController.productIds}" var="productId">
+                    <p>#{productId}</p>
+                </ui:repeat>
+            </div>
+        </ui:define>
+    </ui:composition>
+</div>

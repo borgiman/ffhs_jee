@@ -17,7 +17,7 @@ To-Do:
 - ✅ when user clicks on product, display a fixed text in the content view depending on the chosen product
 - ✅ create layout for product display with fixed information
 - ✅ load product information from database
-- ❌ when user clicks on order, add product to cart, switch to cart view and display something simple for every product in the cart
+- ✅ when user clicks on order, add product to cart, switch to cart view and display something simple for every product in the cart
 - ❌ create layout for cart, including all fields to enter shipping address and button to finish the order
 - ❌ extend db script to create schema for orders
 - ❌ insert order information in the database when a user finishes an order
