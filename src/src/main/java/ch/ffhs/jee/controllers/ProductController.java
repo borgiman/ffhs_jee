@@ -5,6 +5,7 @@ import ch.ffhs.jee.models.Product;
 import ch.ffhs.jee.models.ProductCategory;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 @Named

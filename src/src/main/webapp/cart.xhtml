@@ -3,11 +3,60 @@
      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
      xmlns:h="http://xmlns.jcp.org/jsf/html">
     <ui:composition template="template.xhtml">
+        <ui:define name="metadata">
+            <f:metadata>
+                <f:viewAction action="#{cartController.init}" />
+            </f:metadata>
+        </ui:define>
         <ui:define name="content">
-            <div class="container-fluid row">
-                <ui:repeat value="#{cartController.productIds}" var="productId">
-                    <p>#{productId}</p>
-                </ui:repeat>
+            <div class="container-fluid">
+                <h1 class="cart-h1 mb-4">Warenkorb</h1>
+                <ui:fragment rendered="#{cartController.products.size() == 0}">
+                    <span>Der Warenkorb ist leer</span>
+                </ui:fragment>
+                <ui:fragment rendered="#{cartController.products.size() != 0}">
+                    <ui:repeat value="#{cartController.products}" var="product">
+                        <div class="cart-product-div">
+                            <div class="cart-product-detail-div">
+                                <h:graphicImage styleClass="cart-image me-4" name="img/#{product.id}.png" />
+                                <div>
+                                    <span class="cart-vendorName">#{product.vendorName}</span>
+                                    <span class="cart-productName">#{product.productName}</span>
+                                    <div>
+                                        <span class="cart-shortDetail">#{product.shortDetail}</span>
+                                    </div>
+                                    <div>
+                                    <span class="cart-shipping mt-2">
+                                        <span class="cart-shipping-icon">
+                                            <svg fill="none" viewBox="0 0 16 16" width="16" height="16" class="sc-jdlgv0-0 frmseU"><path fill="#73C44D" fill-rule="evenodd" d="M6.893 11.139 3.847 8.092l1.108-1.015 1.938 1.939 4.153-4.154 1.108 1.107-5.261 5.17ZM8 1.999A6 6 0 1 0 8 14.003 6 6 0 0 0 8 2Z" clip-rule="evenodd"></path></svg>
+                                        </span>
+                                        <span class="ms-2"><strong>Übermorgen</strong> geliefert</span>
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart-price-action-div">
+                                <span><strong>#{product.price}.-</strong></span>
+                                <h:form>
+                                    <h:commandLink value="🗑 Entfernen" action="#{cartController.removeFromCart(product.id)}" />
+                                </h:form>
+                            </div>
+                        </div>
+                    </ui:repeat>
+                    <div class="cart-shipping-div">
+                        <span>Versand</span>
+                        <span>Kostenlos</span>
+                    </div>
+                    <div class="cart-total-div">
+                        <span><strong>Total</strong></span>
+                        <span><strong>#{cartController.total}.-</strong></span>
+                    </div>
+                    <div class="cart-order-div pt-2">
+                        <h:form>
+                            <h:commandButton class="blue-button" value="Zur Kasse" action="#{cartController.startOrdering()}" />
+                        </h:form>
+                    </div>
+                </ui:fragment>
             </div>
         </ui:define>
     </ui:composition>

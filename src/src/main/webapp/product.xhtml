@@ -41,6 +41,9 @@
                                 <span class="product-vendorName">#{productController.product.vendorName}</span>
                                 <span class="product-productName">#{productController.product.productName}</span>
                             </div>
+                            <div>
+                                <span>#{productController.product.shortDetail}</span>
+                            </div>
                             <div class="mt-3">
                                 <span class="product-rating-statictext">Bewertungen</span>
                                 <span class="product-rating">
@@ -64,7 +67,7 @@
                             </div>
                             <div>
                                 <h:form>
-                                    <h:commandButton class="product-order-button" value="🛒 In den Warenkorb" action="#{orderController.order(productController.productId)}" />
+                                    <h:commandButton class="blue-button" value="🛒 In den Warenkorb" action="#{cartController.addToCart(productController.productId)}" />
                                 </h:form>
                             </div>
                         </div>
