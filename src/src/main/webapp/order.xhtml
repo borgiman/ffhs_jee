@@ -5,7 +5,36 @@
     <ui:composition template="template.xhtml">
         <ui:define name="content">
             <div class="container-fluid">
-                <span>please enter all your details</span>
+                <h1 class="order-h1 mb-4">Bestellen</h1>
+                <ui:fragment rendered="#{cartController.products.size() == 0}">
+                    <span>Der Warenkorb ist leer</span>
+                </ui:fragment>
+                <ui:fragment rendered="#{cartController.products.size() != 0}">
+                    <div class="order-div">
+                        <div class="col-4">
+                            <h:messages style="color: red" globalOnly="false"/>
+                            <h:form>
+                                <fieldset class="form-fieldset">
+                                    <h:outputLabel for="firstname" styleClass="form-label required">Vorname</h:outputLabel>
+                                    <h:inputText styleClass="form-control mb-3" id="firstname" value="#{orderController.firstname}" required="true" requiredMessage="Vorname darf nicht leer sein" />
+                                    <h:outputLabel for="lastname" styleClass="form-label required">Nachname</h:outputLabel>
+                                    <h:inputText styleClass="form-control mb-3" id="lastname" value="#{orderController.lastname}" required="true" requiredMessage="Nachname darf nicht leer sein" />
+                                    <h:outputLabel for="streetAndHouseNr" styleClass="form-label required">Strasse, Hausnummer</h:outputLabel>
+                                    <h:inputText styleClass="form-control mb-3" id="streetAndHouseNr" value="#{orderController.streetAndHouseNr}" required="true" requiredMessage="Strasse, Hausnummer darf nicht leer sein" />
+                                    <h:outputLabel for="plz" styleClass="form-label required">PLZ</h:outputLabel>
+                                    <h:inputText styleClass="form-control mb-3" id="plz" value="#{orderController.plz}" required="true" requiredMessage="PLZ darf nicht leer sein" />
+                                    <h:outputLabel for="city" styleClass="form-label required">Ort</h:outputLabel>
+                                    <h:inputText styleClass="form-control mb-3" id="city" value="#{orderController.city}" required="true" requiredMessage="Ort darf nicht leer sein" />
+                                    <h:outputLabel for="email" styleClass="form-label required">Email</h:outputLabel>
+                                    <h:inputText styleClass="form-control mb-3" id="email" value="#{orderController.email}" required="true" requiredMessage="Email darf nicht leer sein" validatorMessage="Email ist ungültig">
+                                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                    </h:inputText>
+                                    <h:commandButton class="blue-button" value="Bestellen" action="#{orderController.order()}" />
+                                </fieldset>
+                            </h:form>
+                        </div>
+                    </div>
+                </ui:fragment>
             </div>
         </ui:define>
     </ui:composition>

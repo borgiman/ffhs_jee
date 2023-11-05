@@ -45,6 +45,11 @@ public class CartController implements Serializable {
         return "order?faces-redirect=true";
     }
 
+    public void clear() {
+        this.productIds.clear();
+        this.products.clear();
+    }
+
     public void init() {
         this.products = new ArrayList<>();
 

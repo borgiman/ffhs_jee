@@ -159,7 +159,7 @@
     background-color: #00559d;
 }
 
-.cart-h1 {
+.cart-h1, .order-h1, .thanks-h1 {
     font-size: 32px;
     line-height: 1.25;
     letter-spacing: 0.03em;
@@ -223,4 +223,9 @@
 .cart-order-div {
     display: flex;
     justify-content: flex-end;
+}
+
+.order-div, .thanks-div {
+    display: flex;
+    justify-content: center;
 }
