@@ -1,6 +1,6 @@
 package ch.ffhs.jee.controllers;
 
-import ch.ffhs.jee.data.DatabaseConnection;
+import ch.ffhs.jee.data.ProductsRepository;
 import ch.ffhs.jee.models.Product;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 @RequestScoped
 public class ProductsController {
     @EJB
-    private DatabaseConnection databaseConnection;
+    private ProductsRepository productsRepository;
     private int productCategoryId;
     private ArrayList<Product> products;
 
@@ -29,28 +29,6 @@ public class ProductsController {
     }
 
     public void init() {
-        this.products = new ArrayList<>();
-
-        try {
-            var connection = databaseConnection.getConnection();
-            var statement = connection.prepareStatement("select id, categoryId, price, vendorName, productName, shortDetail, rating, numberOfRatings from products WHERE categoryId = ?");
-            statement.setInt(1, this.getProductCategoryId());
-            var resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                var id = resultSet.getInt("id");
-                var categoryId = resultSet.getInt("categoryId");
-                var price = resultSet.getInt("price");
-                var vendorName = resultSet.getString("vendorName");
-                var productName = resultSet.getString("productName");
-                var shortDetail = resultSet.getString("shortDetail");
-                var rating = resultSet.getInt("rating");
-                var numberOfRatings = resultSet.getInt("numberOfRatings");
-                var product = new Product(id, categoryId, price, vendorName, productName, shortDetail, rating, numberOfRatings);
-                this.products.add(product);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        this.products = productsRepository.getProductsByCategoryId(this.productCategoryId);
     }
 }
