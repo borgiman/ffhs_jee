@@ -23,4 +23,4 @@ To-Do:
 - ✅ extend db script to create schema for orders
 - ✅ insert order information in the database when a user finishes an order
 - ✅ display an order confirmation after the user has finished an order
-- ❌ display something meaningful on the main page
+- ✅ display something meaningful on the main page
