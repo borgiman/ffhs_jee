@@ -1,7 +1,8 @@
+DROP TABLE IF EXISTS orderentries;
+DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS categories;
-DROP TABLE IF EXISTS orders;
-DROP TABLE IF EXISTS orderentries;
+
 
 CREATE TABLE categories (
     id INT GENERATED ALWAYS AS IDENTITY,
@@ -19,7 +20,7 @@ CREATE TABLE products (
     rating INT NOT NULL,
     numberOfRatings INT NOT NULL,
     PRIMARY KEY(id, categoryId),
-    CONSTRAINT fk_category FOREIGN KEY (categoryId) REFERENCES categories(id)
+    CONSTRAINT fk_category FOREIGN KEY (categoryId) REFERENCES categories (id)
 );
 
 CREATE TABLE orders (
@@ -34,12 +35,13 @@ CREATE TABLE orders (
 );
 
 CREATE TABLE orderentries (
-    id INT GENERATED ALWAYS AS IDENTITY,
+    orderId INT NOT NULL,
     productId INT NOT NULL,
     categoryId INT NOT NULL,
     price INT NOT NULL,
-    PRIMARY key(id, productId),
-    CONSTRAINT fk_product1 FOREIGN KEY (productId, categoryId) REFERENCES products(id, categoryId)
+    PRIMARY key(orderId, productId, categoryId),
+    CONSTRAINT fk_order FOREIGN KEY (orderId) REFERENCES orders (id),
+    CONSTRAINT fk_product FOREIGN KEY (productId, categoryId) REFERENCES products (id, categoryId)
 );
 
 INSERT INTO categories (id, name) OVERRIDING SYSTEM VALUE VALUES

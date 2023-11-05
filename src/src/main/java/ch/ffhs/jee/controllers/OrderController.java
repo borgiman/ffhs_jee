@@ -1,5 +1,7 @@
 package ch.ffhs.jee.controllers;
 
+import ch.ffhs.jee.data.OrdersRepository;
+import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -7,6 +9,8 @@ import jakarta.inject.Named;
 @Named
 @RequestScoped
 public class OrderController {
+    @EJB
+    private OrdersRepository ordersRepository;
     @Inject
     private CartController cartController;
     private String firstname;
@@ -65,6 +69,7 @@ public class OrderController {
     }
 
     public String order() {
+        this.ordersRepository.addOrder(this.firstname, this.lastname, this.streetAndHouseNr, this.plz, this.city, this.email, this.cartController.getProducts());
         this.cartController.clear();
         return "thanks?faces-redirect=true";
     }
