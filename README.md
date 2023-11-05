@@ -20,7 +20,7 @@ To-Do:
 - ✅ when user clicks on order, add product to cart, switch to cart view and display something simple for every product in the cart
 - ✅ create layout for cart and forward to order page when user wants to order
 - ✅ create layout to finish order, including all fields to enter shipping address and button to finish the order
-- ❌ extend db script to create schema for orders
+- ✅ extend db script to create schema for orders
 - ❌ insert order information in the database when a user finishes an order
 - ✅ display an order confirmation after the user has finished an order
 - ❌ display something meaningful on the main page
