@@ -1,16 +1,25 @@
 package ch.ffhs.jee.data;
 
 import ch.ffhs.jee.models.Product;
-import jakarta.ejb.EJB;
 import jakarta.ejb.Singleton;
+import jakarta.inject.Inject;
 
 import java.sql.Statement;
 import java.util.ArrayList;
 
 @Singleton
 public class OrdersRepository {
-    @EJB
-    private DatabaseConnection databaseConnection;
+    private final DatabaseConnection databaseConnection;
+
+    @Inject
+    public OrdersRepository(DatabaseConnection databaseConnection) {
+        this.databaseConnection = databaseConnection;
+    }
+
+    // for whatever reason needed so cdi can proxy this class (weird design)
+    protected OrdersRepository() {
+        this(null);
+    }
 
     public void addOrder(String firstname, String lastname, String streetAndHouseNr, int plz, String city, String email, ArrayList<Product> products) {
         try {

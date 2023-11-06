@@ -1,16 +1,25 @@
 package ch.ffhs.jee.data;
 
 import ch.ffhs.jee.models.ProductCategory;
-import jakarta.ejb.EJB;
 import jakarta.ejb.Singleton;
+import jakarta.inject.Inject;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
 @Singleton
 public class ProductCategoriesRepository {
-    @EJB
-    private DatabaseConnection databaseConnection;
+    private final DatabaseConnection databaseConnection;
+
+    @Inject
+    public ProductCategoriesRepository(DatabaseConnection databaseConnection) {
+        this.databaseConnection = databaseConnection;
+    }
+
+    // for whatever reason needed so cdi can proxy this class (weird design)
+    protected ProductCategoriesRepository() {
+        this(null);
+    }
 
     public ArrayList<ProductCategory> getProductCategories() {
         var productCategories = new ArrayList<ProductCategory>();

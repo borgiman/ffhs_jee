@@ -3,17 +3,26 @@ package ch.ffhs.jee.controllers;
 import ch.ffhs.jee.data.ProductCategoriesRepository;
 import ch.ffhs.jee.models.ProductCategory;
 import jakarta.annotation.PostConstruct;
-import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.util.ArrayList;
 
 @Named
 @RequestScoped
 public class ProductCategoriesController {
-    @EJB
-    private ProductCategoriesRepository productCategoriesRepository;
+    private final ProductCategoriesRepository productCategoriesRepository;
     private ArrayList<ProductCategory> productCategories;
+
+    @Inject
+    public ProductCategoriesController(ProductCategoriesRepository productCategoriesRepository) {
+        this.productCategoriesRepository = productCategoriesRepository;
+    }
+
+    // for whatever reason needed so cdi can proxy this class (weird design)
+    protected ProductCategoriesController() {
+        this(null);
+    }
 
     public ArrayList<ProductCategory> getProductCategories() {
         return this.productCategories;

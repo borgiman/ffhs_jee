@@ -1,7 +1,6 @@
 package ch.ffhs.jee.controllers;
 
 import ch.ffhs.jee.data.OrdersRepository;
-import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -9,16 +8,25 @@ import jakarta.inject.Named;
 @Named
 @RequestScoped
 public class OrderController {
-    @EJB
-    private OrdersRepository ordersRepository;
-    @Inject
-    private CartController cartController;
+    private final OrdersRepository ordersRepository;
+    private final CartController cartController;
     private String firstname;
     private String lastname;
     private String streetAndHouseNr;
     private int plz;
     private String city;
     private String email;
+
+    @Inject
+    public OrderController(OrdersRepository ordersRepository, CartController cartController) {
+        this.ordersRepository = ordersRepository;
+        this.cartController = cartController;
+    }
+
+    // for whatever reason needed so cdi can proxy this class (weird design)
+    protected OrderController() {
+        this(null, null);
+    }
 
     public String getFirstname() {
         return this.firstname;

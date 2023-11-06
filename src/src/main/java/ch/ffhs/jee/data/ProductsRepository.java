@@ -1,8 +1,8 @@
 package ch.ffhs.jee.data;
 
 import ch.ffhs.jee.models.Product;
-import jakarta.ejb.EJB;
 import jakarta.ejb.Singleton;
+import jakarta.inject.Inject;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -10,8 +10,17 @@ import java.util.stream.Collectors;
 
 @Singleton
 public class ProductsRepository {
-    @EJB
-    private DatabaseConnection databaseConnection;
+    private final DatabaseConnection databaseConnection;
+
+    @Inject
+    public ProductsRepository(DatabaseConnection databaseConnection) {
+        this.databaseConnection = databaseConnection;
+    }
+
+    // for whatever reason needed so cdi can proxy this class (weird design)
+    protected ProductsRepository() {
+        this(null);
+    }
 
     public ArrayList<Product> getProducts(ArrayList<Integer> productIds) {
         var products = new ArrayList<Product>();
