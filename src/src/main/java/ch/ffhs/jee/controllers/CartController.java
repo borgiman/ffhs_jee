@@ -27,35 +27,53 @@ public class CartController implements Serializable {
         this(null);
     }
 
-    // todo add test
+    /**
+     * add a product to the cart
+     * @param productId id of the product to be added
+     * @return redirect to the cart
+     */
     public String addToCart(int productId) {
         this.productIds.add(productId);
         return "cart?faces-redirect=true";
     }
 
-    // todo add test
+    /**
+     * remove a product from the cart
+     * @param productId id of the product to be removed
+     * @return redirect to the cart
+     */
     public String removeFromCart(int productId) {
         this.productIds.removeIf(x -> x.equals(productId));
         this.products.removeIf(x -> x.getId() == productId);
         return "cart?faces-redirect=true";
     }
 
-    // todo add test
+    /**
+     * returns the products in the cart
+     */
     public ArrayList<Product> getProducts() {
         return this.products;
     }
 
-    // todo add test
+    /**
+     * returns the sum of all product prices in the cart
+     * @return the sum of all product prices in the cart
+     */
     public int getTotal() {
         return this.products.stream().mapToInt(Product::getPrice).sum();
     }
 
-    // todo add test
+    /**
+     * redirects to the cart
+     * @return redirect to the cart
+     */
     public String startOrdering() {
         return "order?faces-redirect=true";
     }
 
-    // todo add test
+    /**
+     * removes all products from the cart
+     */
     public void clear() {
         this.productIds.clear();
         this.products.clear();

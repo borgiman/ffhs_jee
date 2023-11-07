@@ -14,6 +14,9 @@ import java.sql.SQLException;
 public class DatabaseConnection {
     private final Connection connection;
 
+    /**
+     * initiates the database connection
+     */
     public DatabaseConnection() throws SQLException, NamingException {
         var context = new InitialContext();
         var dataSource = (DataSource)context.lookup("jdbc/jee");

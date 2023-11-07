@@ -21,6 +21,10 @@ public class ProductCategoriesRepository {
         this(null);
     }
 
+    /**
+     * returns all product categories from the database
+     * @return all product categories from the database
+     */
     public ArrayList<ProductCategory> getProductCategories() {
         var productCategories = new ArrayList<ProductCategory>();
 
@@ -40,6 +44,11 @@ public class ProductCategoriesRepository {
         return productCategories;
     }
 
+    /**
+     * returns a product category from the database
+     * @param productCategoryId id of the product category to be returned
+     * @return product category from database
+     */
     public ProductCategory getProductCategory(int productCategoryId) {
         ProductCategory productCategory = null;
 

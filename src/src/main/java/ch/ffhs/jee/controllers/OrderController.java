@@ -76,6 +76,10 @@ public class OrderController {
         this.email = email;
     }
 
+    /**
+     * execute the order
+     * @return redirect to the thanks page
+     */
     public String order() {
         this.ordersRepository.addOrder(this.firstname, this.lastname, this.streetAndHouseNr, this.plz, this.city, this.email, this.cartController.getProducts());
         this.cartController.clear();

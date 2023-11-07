@@ -24,6 +24,10 @@ public class ProductCategoriesController {
         this(null);
     }
 
+    /**
+     * returns all product categories
+     * @return all product categories
+     */
     public ArrayList<ProductCategory> getProductCategories() {
         return this.productCategories;
     }

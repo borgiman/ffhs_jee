@@ -21,6 +21,9 @@ public class OrdersRepository {
         this(null);
     }
 
+    /**
+     * adds an order to the database
+     */
     public void addOrder(String firstname, String lastname, String streetAndHouseNr, int plz, String city, String email, ArrayList<Product> products) {
         try {
             var connection = databaseConnection.getConnection();

@@ -22,6 +22,11 @@ public class ProductsRepository {
         this(null);
     }
 
+    /**
+     * returns products from the database
+     * @param productIds ids of the products to be returned
+     * @return products from the database
+     */
     public ArrayList<Product> getProducts(ArrayList<Integer> productIds) {
         var products = new ArrayList<Product>();
 
@@ -53,6 +58,11 @@ public class ProductsRepository {
         return products;
     }
 
+    /**
+     * returns a product from the database
+     * @param productId id of the product to be returned
+     * @return product from the database
+     */
     public Product getProduct(int productId) {
         var productIds = new ArrayList<Integer>();
         productIds.add(productId);
@@ -60,6 +70,11 @@ public class ProductsRepository {
         return !products.isEmpty() ? products.get(0) : null;
     }
 
+    /**
+     * returns all products of a category from the database
+     * @param categoryId id of the category of the products
+     * @return products of a category from the database
+     */
     public ArrayList<Product> getProductsByCategoryId(int categoryId) {
         var products = new ArrayList<Product>();
 
